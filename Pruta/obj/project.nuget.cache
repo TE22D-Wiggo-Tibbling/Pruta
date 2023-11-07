@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "N5S+D8xx5VOx6NrY2qzh7yayX3EzCTtmqM80Cog0/0X/RpZSYNKikanaHctIAGZnb431FZYxMLxOtquznxlYUQ==",
+  "success": true,
+  "projectFilePath": "g:\\Min enhet\\prog 1 med micke B!!\\Pruta\\Pruta\\Pruta.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wiggo.tibbling\\.nuget\\packages\\raylib-cs\\5.0.0\\raylib-cs.5.0.0.nupkg.sha512",
+    "C:\\Users\\wiggo.tibbling\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
