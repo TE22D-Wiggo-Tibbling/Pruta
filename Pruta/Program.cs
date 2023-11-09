@@ -9,34 +9,69 @@ using System.Runtime.Serialization;
 int prutchans = 10;
 bool end = false;
 Random tärning = new Random();
-int nummer = tärning.Next(0,20);
+int nummer = tärning.Next(0, 20);
+
+
+item item1 = new item();
+
 
 
 //------------------------------------------------------------------------------------------------
 //PRUT KOD
 //------------------------------------------------------------------------------------------------
 
-while(!end){
-    nummer = tärning.Next(0,20);
+
+// tärning
+while (!end)
+{
+    nummer = tärning.Next(0, 21);
     System.Console.WriteLine(nummer);
-   string svar= Console.ReadLine();
-  
-  if(nummer > prutchans){
-    System.Console.WriteLine("ja");
-  }
-  
-  
-  
-   if(svar == "a"){
-    end = true;
-   }
+
+    if (nummer > prutchans && nummer != 20)
+    {
+        System.Console.WriteLine("ja");
+    }
+    else if (nummer < prutchans && nummer != 1)
+    {
+        System.Console.WriteLine("nej");
+    }
+    else if (nummer == 20)
+    {
+        System.Console.WriteLine("bäst");
+    }
+    else if (nummer == 1)
+    {
+        System.Console.WriteLine("skit");
+    }
+
+    string svar = Console.ReadLine();
+
+
+    if (svar == "a")
+    {
+        end = true;
+    }
+
+
+    //    PRUTCHANS
+
+
+
 }
 
 
 
 
 
+
+
 Console.ReadLine();
+
+
+
+public class item{
+    public string rank = "";
+}
 
 
 
