@@ -3,61 +3,86 @@ using Raylib_cs;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+
+//------------------------------------------------------------------------------------------------
+//alla items
+//------------------------------------------------------------------------------------------------
+Random random = new Random();
+
+Item item = new();
+
+
+
+
+
+// Item boll = new();
+
+
+
+
 //------------------------------------------------------------------------------------------------
 //ints och allt där imällan
 //------------------------------------------------------------------------------------------------
-int prutchans = 10;
-bool end = false;
+// int prutchans = 10;
+// bool end = false;
 Random tärning = new Random();
-int nummer = tärning.Next(0, 20);
+int nummer = tärning.Next(1, 21);
+int stor = 200;
+
+Item item1 = new Item();
 
 
-item item1 = new item();
+int width = 1920;
+int height = 1080;
+
+Raylib.InitWindow(width, height, "wassa");
 
 
-
-//------------------------------------------------------------------------------------------------
-//PRUT KOD
-//------------------------------------------------------------------------------------------------
-
-
-// tärning
-while (!end)
+while (!Raylib.WindowShouldClose())
 {
-    nummer = tärning.Next(0, 21);
-    System.Console.WriteLine(nummer);
 
-    if (nummer > prutchans && nummer != 20)
-    {
-        System.Console.WriteLine("ja");
-    }
-    else if (nummer < prutchans && nummer != 1)
-    {
-        System.Console.WriteLine("nej");
-    }
-    else if (nummer == 20)
-    {
-        System.Console.WriteLine("bäst");
-    }
-    else if (nummer == 1)
-    {
-        System.Console.WriteLine("skit");
-    }
-
-    string svar = Console.ReadLine();
+    //------------------------------------------------------------------------------------------------
+    //PRUT KOD
+    //------------------------------------------------------------------------------------------------
 
 
-    if (svar == "a")
+    // tärning
+    // while (!end)
+
+
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
     {
-        end = true;
+        nummer = tärning.Next(0, 21);
     }
+
+
+
 
 
     //    PRUTCHANS
 
 
 
+
+
+
+
+    //------------------------------------------------------------------------------------------------
+    // visiols
+    //------------------------------------------------------------------------------------------------
+
+    Raylib.BeginDrawing();
+    Raylib.ClearBackground(Color.BLUE);
+
+    Raylib.DrawText(item.rank,200,100,100,Color.BLACK);
+
+    Raylib.DrawText(nummer.ToString(), width / 2 - stor / 2, height / 2 - stor / 2, stor, Color.BEIGE);
+    Raylib.EndDrawing();
 }
+
+
+
+
 
 
 
@@ -69,27 +94,19 @@ Console.ReadLine();
 
 
 
-public class item{
-    public string rank = "";
+public class Item
+{
+
+    List<string> ranks = new() { "grå", "blå", "gul" };
+    public string rank;
+
+    public Item()
+    {
+        rank = ranks[Random.Shared.Next(ranks.Count)];
+    }
+
 }
 
 
 
-//------------------------------------------------------------------------------------------------
-//GAME LOGIC
-//------------------------------------------------------------------------------------------------
 
-
-
-
-//---------------------------------------------------------------------------------------------------
-//RENDER
-//---------------------------------------------------------------------------------------------------
-// Raylib.InitWindow(800, 600, "wassa");
-
-
-// while (!Raylib.WindowShouldClose()){
-//     Raylib.BeginDrawing();
-//     Raylib.ClearBackground(Color.BLUE);
-//     Raylib.EndDrawing();
-// }
