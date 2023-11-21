@@ -3,6 +3,7 @@ using Raylib_cs;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 //------------------------------------------------------------------------------------------------
 //alla items
@@ -37,6 +38,10 @@ int height = 1080;
 
 Raylib.InitWindow(width, height, "wassa");
 
+int TimesSpin=10;
+float timermimmer=0;
+bool spin=false;
+
 
 while (!Raylib.WindowShouldClose())
 {
@@ -49,15 +54,30 @@ while (!Raylib.WindowShouldClose())
     // tärning
     // while (!end)
 
-
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+timermimmer++;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)&&!spin)
     {
-        nummer = tärning.Next(0, 21);
+       spin=true;
+       TimesSpin=0;
     }
+if(spin){
+            if(timermimmer>100){
+                nummer = tärning.Next(1, 21); 
+            TimesSpin++;
+            timermimmer=0;
+            }
+}
+if(TimesSpin>20){
+    spin=false;
+}
+            // {
+            // }
+        
 
 
 
-
+Vector2 fof= new() ;
+int föf = Raylib.MeasureText(nummer.ToString(),stor);
 
     //    PRUTCHANS
 
@@ -76,7 +96,7 @@ while (!Raylib.WindowShouldClose())
 
     Raylib.DrawText(item.rank,200,100,100,Color.BLACK);
 
-    Raylib.DrawText(nummer.ToString(), width / 2 - stor / 2, height / 2 - stor / 2, stor, Color.BEIGE);
+    Raylib.DrawText(nummer.ToString(), width / 2 - föf / 2, height / 2 - stor / 2, stor, Color.BEIGE);
     Raylib.EndDrawing();
 }
 
