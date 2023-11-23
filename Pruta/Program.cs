@@ -38,9 +38,12 @@ int height = 1080;
 
 Raylib.InitWindow(width, height, "wassa");
 
-int TimesSpin=10;
-float timermimmer=0;
-bool spin=false;
+int TimesSpin = 10;
+float timermimmer = 0;
+bool spin = false;
+
+bool rullning = false;
+int spins = 0;
 
 
 while (!Raylib.WindowShouldClose())
@@ -51,33 +54,60 @@ while (!Raylib.WindowShouldClose())
     //------------------------------------------------------------------------------------------------
 
 
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_W)&&spins==0)
+    {
+        rullning = true;
+        spins = 1;
+    }
     // tärning
     // while (!end)
 
-timermimmer++;
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)&&!spin)
+
+
+
+    if (rullning == true)
     {
-       spin=true;
-       TimesSpin=0;
-    }
-if(spin){
-            if(timermimmer>100){
-                nummer = tärning.Next(1, 21); 
-            TimesSpin++;
-            timermimmer=0;
+
+        timermimmer++;
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && !spin && spins > 0)
+        {
+            spins--;
+            spin = true;
+            TimesSpin = 0;
+        }
+        if (spin)
+        {
+            if (timermimmer > 100)
+            {
+                nummer = tärning.Next(1, 21);
+                TimesSpin++;
+                timermimmer = 0;
             }
-}
-if(TimesSpin>20){
-    spin=false;
-}
-            // {
-            // }
+        }
+
+        if (TimesSpin > 20)
+        {
+            spin = false;
+        }
+
+        if (spins == 0)
+        {
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_F))
+            {
+                rullning = false;
+            }
+        }
         
 
+        
+        // {
+        // }
+    }
 
 
-Vector2 fof= new() ;
-int föf = Raylib.MeasureText(nummer.ToString(),stor);
+
+
+    int föf = Raylib.MeasureText(nummer.ToString(), stor);
 
     //    PRUTCHANS
 
@@ -94,26 +124,18 @@ int föf = Raylib.MeasureText(nummer.ToString(),stor);
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.BLUE);
 
-    Raylib.DrawText(item.rank,200,100,100,Color.BLACK);
 
-    Raylib.DrawText(nummer.ToString(), width / 2 - föf / 2, height / 2 - stor / 2, stor, Color.BEIGE);
+    if (rullning)
+    {
+        Raylib.DrawText(item.rank, 200, 100, 100, Color.BLACK);
+
+        Raylib.DrawText(nummer.ToString(), width / 2 - föf / 2, height / 2 - stor / 2, stor, Color.BEIGE);
+
+    }
+
     Raylib.EndDrawing();
+
 }
-
-
-
-
-
-
-
-
-
-
-
-Console.ReadLine();
-
-
-
 public class Item
 {
 
