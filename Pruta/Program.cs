@@ -45,6 +45,8 @@ bool spin = false;
 bool rullning = false;
 int spins = 0;
 
+Rectangle r = new(width / 2, height / 2, 300, 800);
+
 
 while (!Raylib.WindowShouldClose())
 {
@@ -54,10 +56,11 @@ while (!Raylib.WindowShouldClose())
     //------------------------------------------------------------------------------------------------
 
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_W)&&spins==0)
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_W) && spins == 0)
     {
         rullning = true;
         spins = 1;
+        nummer = 20;
     }
     // tärning
     // while (!end)
@@ -69,9 +72,9 @@ while (!Raylib.WindowShouldClose())
     {
 
         timermimmer++;
-        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && !spin && spins > 0)
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && !spin && spins > -1)
         {
-            spins--;
+            spins = -1;
             spin = true;
             TimesSpin = 0;
         }
@@ -90,16 +93,17 @@ while (!Raylib.WindowShouldClose())
             spin = false;
         }
 
-        if (spins == 0)
+        if (spins == -1)
         {
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_F))
             {
                 rullning = false;
+                spins = 0;
             }
         }
-        
 
-        
+
+
         // {
         // }
     }
@@ -125,11 +129,16 @@ while (!Raylib.WindowShouldClose())
     Raylib.ClearBackground(Color.BLUE);
 
 
+
     if (rullning)
     {
-        Raylib.DrawText(item.rank, 200, 100, 100, Color.BLACK);
+        Raylib.DrawRectanglePro(r, new Vector2(r.Width / 2, r.Height / 2), 180, Color.LIME);
+        Raylib.DrawText(nummer.ToString(), width / 2 - föf / 2, height / 2 - stor / 2, stor, Color.BLACK);
+        Raylib.DrawText(item1.rank, 200, 100, 100, Color.BLACK);
+        Raylib.DrawText(item1.nödrull, 200, 200, 100, Color.BLACK);
 
-        Raylib.DrawText(nummer.ToString(), width / 2 - föf / 2, height / 2 - stor / 2, stor, Color.BEIGE);
+        Raylib.DrawText(item.rank, 200, 300, 100, Color.BLACK);
+        Raylib.DrawText(item.nödrull, 200, 400, 100, Color.BLACK);
 
     }
 
@@ -140,11 +149,17 @@ public class Item
 {
 
     List<string> ranks = new() { "grå", "blå", "gul" };
+    List<int> nödvändigt = new() { 5, 10, 15 };
     public string rank;
+    public string nödrull;
 
     public Item()
     {
-        rank = ranks[Random.Shared.Next(ranks.Count)];
+        int nivå = Random.Shared.Next(ranks.Count);
+
+        rank = ranks[nivå];
+        nödrull = nödvändigt[nivå].ToString();
+
     }
 
 }
