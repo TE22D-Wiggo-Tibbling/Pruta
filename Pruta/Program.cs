@@ -10,13 +10,17 @@ using System.ComponentModel.DataAnnotations;
 //------------------------------------------------------------------------------------------------
 Random random = new Random();
 
-Item item = new();
+Item item1 = new Item();
+item1.beskrivning = "fgdgfrdsfgrdsrfgdf";
+Item item = new Item();
+item.beskrivning = "fgdgbbbbbbdf";
 
 
 
 
 
-// Item boll = new();
+
+
 
 
 
@@ -24,13 +28,11 @@ Item item = new();
 //------------------------------------------------------------------------------------------------
 //ints och allt där imällan
 //------------------------------------------------------------------------------------------------
-// int prutchans = 10;
-// bool end = false;
+
 Random tärning = new Random();
 int nummer = tärning.Next(1, 21);
 int stor = 200;
 
-Item item1 = new Item();
 
 
 int width = 1920;
@@ -48,6 +50,8 @@ int spins = 0;
 Rectangle r = new(width / 2, height / 2, 300, 800);
 
 
+bool test = false;
+
 while (!Raylib.WindowShouldClose())
 {
 
@@ -62,8 +66,7 @@ while (!Raylib.WindowShouldClose())
         spins = 1;
         nummer = 20;
     }
-    // tärning
-    // while (!end)
+
 
 
 
@@ -104,8 +107,7 @@ while (!Raylib.WindowShouldClose())
 
 
 
-        // {
-        // }
+        
     }
 
 
@@ -120,6 +122,10 @@ while (!Raylib.WindowShouldClose())
 
 
 
+        
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_Q)){
+       test = true;
+    }
 
     //------------------------------------------------------------------------------------------------
     // visiols
@@ -128,6 +134,11 @@ while (!Raylib.WindowShouldClose())
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.BLUE);
 
+        if (test)
+        {
+            
+        Raylib.DrawRectangle(0,height-height/5,width,height/5,Color.BROWN);
+        }
 
 
     if (rullning)
@@ -153,8 +164,10 @@ public class Item
     public string rank;
     public string nödrull;
 
+    public string beskrivning = "";
     public Item()
     {
+
         int nivå = Random.Shared.Next(ranks.Count);
 
         rank = ranks[nivå];
