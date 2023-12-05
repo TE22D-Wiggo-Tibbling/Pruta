@@ -15,16 +15,7 @@ item1.beskrivning = "fgdgfrdsfgrdsrfgdf";
 Item item = new Item();
 item.beskrivning = "fgdgbbbbbbdf";
 
-
-
-
-
-
-
-
-
-
-
+List<Item> ite =new(){item,item1};
 //------------------------------------------------------------------------------------------------
 //ints och allt där imällan
 //------------------------------------------------------------------------------------------------
