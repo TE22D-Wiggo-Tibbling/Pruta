@@ -62,6 +62,15 @@ bool lås2 = false;
 bool lås3 = false;
 bool lås4 = false;
 bool lås5 = false;
+
+
+
+int MAX_INPUT_CHARS=9;
+    Rectangle textBox=new Rectangle( width/2 - 100, 180, 225, 50 );
+    bool mouseOnText = false;
+
+    char[] name = new char[MAX_INPUT_CHARS];
+    int letterCount = 0;
 //------------------------------------------------------------------------------------------------
 //PRUT KOD
 //------------------------------------------------------------------------------------------------
@@ -246,11 +255,47 @@ while (!Raylib.WindowShouldClose())
 
      int yatzy=Raylib.MeasureText("YATZY!!",300);
 
+
+
+
+
+          if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), textBox)) mouseOnText = true;
+        else mouseOnText = false;
+
+        if (mouseOnText)
+        {
+            // Set the window's cursor to the I-Beam
+            Raylib.SetMouseCursor(MouseCursor.MOUSE_CURSOR_IBEAM);
+
+            // Get char pressed (unicode character) on the queue
+            int key = Raylib.GetCharPressed();
+
+            // Check if more characters have been pressed on the same frame
+
+
+         // Check if more characters have been pressed on the same frame
+            while (key > 0)
+            {
+                // NOTE: Only allow keys in range [32..125]
+                if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
+                {
+                    name[letterCount] = (char)key;
+                    // name[letterCount+1] = '\0'; // Add null terminator at the end of the string.
+                    letterCount++;
+                }
+
+                key = Raylib.GetCharPressed();  // Check next character in the queue
+            }
+        }
+
     //------------------------------------------------------------------------------------------------
     // visiols
     //------------------------------------------------------------------------------------------------
 
     Raylib.BeginDrawing();
+
+
+    
     Raylib.ClearBackground(Color.BROWN);
 
     // for (int i = 0; i < 5; i++)
@@ -342,6 +387,17 @@ if (tärning1==tärning2&&tärning2==tärning3&&tärning3==tärning4&&tärning4=
 
 
     }
+
+
+
+ 
+
+
+         Raylib.DrawRectangleRec(textBox, Color.LIGHTGRAY);
+            if (mouseOnText) Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, 225, 50, Color.RED);
+            else Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, (int)textBox.Width, (int)textBox.Height, Color.DARKGRAY);
+
+ Raylib.DrawText(new String(name), (int)textBox.X + 5, (int)textBox.X + 8, 40, Color.MAROON);
 
     Raylib.EndDrawing();
 
