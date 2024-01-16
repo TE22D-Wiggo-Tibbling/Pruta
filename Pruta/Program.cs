@@ -65,7 +65,7 @@ bool test = false;
 
 
 
- int slag = 3;
+int slag = 3;
 
 
 
@@ -78,7 +78,7 @@ bool mouseOnText = false;
 char[] name = new char[MAX_INPUT_CHARS];
 int letterCount = 0;
 
-int skriv=1;
+int skriv = 1;
 //------------------------------------------------------------------------------------------------
 //PRUT KOD
 //------------------------------------------------------------------------------------------------
@@ -86,20 +86,20 @@ Raylib.SetTargetFPS(60);
 while (!Raylib.WindowShouldClose())
 {
     // -------------------------------------låsa--------------------------------------------------
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && !tärningar[0].Låsande && tärningar[0].värde>0&&skriv==1) { tärningar[0].Låsande = true; }
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && tärningar[0].Låsande&&skriv==1) { tärningar[0].Låsande = false; }
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && !tärningar[0].Låsande && tärningar[0].värde > 0 && skriv == 1) { tärningar[0].Låsande = true; }
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && tärningar[0].Låsande && skriv == 1) { tärningar[0].Låsande = false; }
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && !tärningar[1].Låsande && tärningar[1].värde>0&&skriv==1) tärningar[1].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && tärningar[1].Låsande&&skriv==1) tärningar[1].Låsande = false;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && !tärningar[1].Låsande && tärningar[1].värde > 0 && skriv == 1) tärningar[1].Låsande = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && tärningar[1].Låsande && skriv == 1) tärningar[1].Låsande = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && !tärningar[2].Låsande && tärningar[2].värde>0&&skriv==1) tärningar[2].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && tärningar[2].Låsande&&skriv==1) tärningar[2].Låsande = false;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && !tärningar[2].Låsande && tärningar[2].värde > 0 && skriv == 1) tärningar[2].Låsande = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && tärningar[2].Låsande && skriv == 1) tärningar[2].Låsande = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && !tärningar[3].Låsande && tärningar[3].värde>0&&skriv==1) tärningar[3].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && tärningar[3].Låsande&&skriv==1) tärningar[3].Låsande = false;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && !tärningar[3].Låsande && tärningar[3].värde > 0 && skriv == 1) tärningar[3].Låsande = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && tärningar[3].Låsande && skriv == 1) tärningar[3].Låsande = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && !tärningar[4].Låsande && tärningar[4].värde>0&&skriv==1) tärningar[4].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && tärningar[4].Låsande&&skriv==1) tärningar[4].Låsande = false;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && !tärningar[4].Låsande && tärningar[4].värde > 0 && skriv == 1) tärningar[4].Låsande = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && tärningar[4].Låsande && skriv == 1) tärningar[4].Låsande = false;
     // -------------------------------------låsa-up-----------------------------------------------
 
 
@@ -109,7 +109,7 @@ while (!Raylib.WindowShouldClose())
     }
 
 
-    
+
     if (timermimmer > 100)
     {
 
@@ -255,57 +255,57 @@ while (!Raylib.WindowShouldClose())
 
 
 
-if (Raylib.IsKeyPressed(KeyboardKey.KEY_TAB))
-{
-    skriv*=-1;
-}
-if (skriv==-1)
-{
-    
-    for (int q = 0; q < 4; q++)
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_TAB))
     {
-        for (int p = 0; p < 16; p++)
+        skriv *= -1;
+    }
+    if (skriv == -1)
+    {
+
+        for (int q = 0; q < 4; q++)
         {
-
-            textBox = new Rectangle(q *150+ width / 3, p * 50+75, 150, 50);
-            if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), textBox)) mouseOnText = true;
-            else mouseOnText = false;
-
-            if (mouseOnText)
+            for (int p = 0; p < 16; p++)
             {
-                // Set the window's cursor to the I-Beam
-                Raylib.SetMouseCursor(MouseCursor.MOUSE_CURSOR_IBEAM);
 
-                // Get char pressed (unicode character) on the queue
-                int key = Raylib.GetCharPressed();
+                textBox = new Rectangle(q * 150 + width / 3, p * 50 + 75, 150, 50);
+                if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), textBox)) mouseOnText = true;
+                else mouseOnText = false;
 
-                // Check if more characters have been pressed on the same frame
-
-
-                // Check if more characters have been pressed on the same frame
-                while (key > 0)
+                if (mouseOnText)
                 {
-                    // NOTE: Only allow keys in range [32..125]
-                    if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
+                    // Set the window's cursor to the I-Beam
+                    Raylib.SetMouseCursor(MouseCursor.MOUSE_CURSOR_IBEAM);
+
+                    // Get char pressed (unicode character) on the queue
+                    int key = Raylib.GetCharPressed();
+
+                    // Check if more characters have been pressed on the same frame
+
+
+                    // Check if more characters have been pressed on the same frame
+                    while (key > 0)
                     {
-                        name[letterCount] = (char)key;
-                        // name[letterCount+1] = '\0'; // Add null terminator at the end of the string.
-                        letterCount++;
+                        // NOTE: Only allow keys in range [32..125]
+                        if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
+                        {
+                            name[letterCount] = (char)key;
+                            // name[letterCount+1] = '\0'; // Add null terminator at the end of the string.
+                            letterCount++;
+                        }
+
+                        key = Raylib.GetCharPressed();  // Check next character in the queue
                     }
-
-                    key = Raylib.GetCharPressed();  // Check next character in the queue
                 }
+
+                Raylib.DrawRectangleRec(textBox, Color.LIGHTGRAY);
+                if (mouseOnText) Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, (int)textBox.Width, (int)textBox.Height, Color.RED);
+                else Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, (int)textBox.Width, (int)textBox.Height, Color.DARKGRAY);
+
+                Raylib.DrawText(new String(name), (int)textBox.X + 5, (int)textBox.Y + 8, 40, Color.MAROON);
+
             }
-
-            Raylib.DrawRectangleRec(textBox, Color.LIGHTGRAY);
-            if (mouseOnText) Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, (int)textBox.Width, (int)textBox.Height, Color.RED);
-            else Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, (int)textBox.Width, (int)textBox.Height, Color.DARKGRAY);
-
-            Raylib.DrawText(new String(name), (int)textBox.X + 5, (int)textBox.Y + 8, 40, Color.MAROON);
-
         }
     }
-}
 
     Raylib.EndDrawing();
 }
@@ -321,21 +321,36 @@ public class tärning
 
     public bool Låsande = false;
 
-    public int slag = 3; 
+    public int slag = 3;
+
+    public int ändring = 0;
+    public float timmer = 0f;
 
     public void Roll()
     {
+
+        timmer--;
+        
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
-            if(!Låsande && slag>0){
-            värde = random.Next(1, 7);
+            ändring = 20;
+            if (timmer == 0&&ändring>0)
+            {
+                ändring--;
+
+                if (!Låsande && slag > 0)
+                {
+                    värde = random.Next(1, 7);
+                }
+                slag--;
+                timmer=100f;
             }
-            slag--;
         }
-        if(Raylib.IsKeyPressed(KeyboardKey.KEY_ZERO)){
-            slag=3;
-            värde=0;
-            Låsande=false;
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_ZERO))
+        {
+            slag = 3;
+            värde = 0;
+            Låsande = false;
         }
     }
 }
