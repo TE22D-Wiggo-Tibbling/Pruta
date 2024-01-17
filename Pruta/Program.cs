@@ -9,197 +9,72 @@ using System.Security.Cryptography.X509Certificates;
 
 
 
-List<tärning> tärningar = new();
+//------------------------------------------------------------------------------------------------
+//Tärningar
+//------------------------------------------------------------------------------------------------
+
+List<tärning> dice = new();
 
 for (int i = 0; i < 5; i++)
 {
-    tärningar.Add(new tärning());
+    dice.Add(new tärning());
 }
 
-foreach (tärning tärn in tärningar)
+foreach (tärning turn in dice)
 {
-    tärn.Roll();
+    turn.Roll();
 }
 
 
-
-
 //------------------------------------------------------------------------------------------------
-//alla items
+//Variablar
 //------------------------------------------------------------------------------------------------
 
+int Size = 200;
 
 
+int Width = 1920;
+int Height = 1080;
 
+Raylib.InitWindow(Width, Height, "wassa");
 
-// List<Item> ite =new(){item,item1};
-//------------------------------------------------------------------------------------------------
-//ints och allt där imällan
-//------------------------------------------------------------------------------------------------
-
-Random tärning = new Random();
-int nummer = tärning.Next(1, 7);
-int stor = 200;
-
-
-
-
-
-int width = 1920;
-int height = 1080;
-
-Raylib.InitWindow(width, height, "wassa");
-
-int TimesSpin = 10;
-float timermimmer = 0;
-bool spin = false;
-
-bool rullning = false;
-int spins = 0;
-
-Rectangle r = new(width / 2, height / 2, 300, 800);
-
-
-bool test = false;
-
-
-
-
-int slag = 3;
-
-
-
-
-
+// ---------------------------------------------------------------------------------------------
 int MAX_INPUT_CHARS = 2;
-Rectangle textBox = new Rectangle(width / 3 - 100, 180, 150, 50);
+Rectangle textBox = new Rectangle(Width / 3 - 100, 180, 150, 50);
 bool mouseOnText = false;
 
-char[] name = new char[MAX_INPUT_CHARS];
+char[] Name = new char[MAX_INPUT_CHARS];
 int letterCount = 0;
+int writing = 1;
+// ---------------------------------------------------------------------------------------------
 
-int skriv = 1;
-//------------------------------------------------------------------------------------------------
-//PRUT KOD
-//------------------------------------------------------------------------------------------------
-Raylib.SetTargetFPS(60);
+
+Raylib.SetTargetFPS(30);
 while (!Raylib.WindowShouldClose())
 {
     // -------------------------------------låsa--------------------------------------------------
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && !tärningar[0].Låsande && tärningar[0].värde > 0 && skriv == 1) { tärningar[0].Låsande = true; }
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && tärningar[0].Låsande && skriv == 1) { tärningar[0].Låsande = false; }
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && !dice[0].Lock && dice[0].Count > 0) { dice[0].Lock = true; }
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && dice[0].Lock) { dice[0].Lock = false; }
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && !tärningar[1].Låsande && tärningar[1].värde > 0 && skriv == 1) tärningar[1].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && tärningar[1].Låsande && skriv == 1) tärningar[1].Låsande = false;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && !dice[1].Lock && dice[1].Count > 0) dice[1].Lock = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && dice[1].Lock) dice[1].Lock = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && !tärningar[2].Låsande && tärningar[2].värde > 0 && skriv == 1) tärningar[2].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && tärningar[2].Låsande && skriv == 1) tärningar[2].Låsande = false;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && !dice[2].Lock && dice[2].Count > 0) dice[2].Lock = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && dice[2].Lock) dice[2].Lock = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && !tärningar[3].Låsande && tärningar[3].värde > 0 && skriv == 1) tärningar[3].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && tärningar[3].Låsande && skriv == 1) tärningar[3].Låsande = false;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && !dice[3].Lock && dice[3].Count > 0) dice[3].Lock = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && dice[3].Lock) dice[3].Lock = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && !tärningar[4].Låsande && tärningar[4].värde > 0 && skriv == 1) tärningar[4].Låsande = true;
-    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && tärningar[4].Låsande && skriv == 1) tärningar[4].Låsande = false;
-    // -------------------------------------låsa-up-----------------------------------------------
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && !dice[4].Lock && dice[4].Count > 0) dice[4].Lock = true;
+    else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && dice[4].Lock) dice[4].Lock = false;
+    // ------------------------------------------------------------------------------------------
 
-
-    foreach (tärning tärn in tärningar)
+    foreach (tärning tärn in dice)
     {
         tärn.Roll();
     }
 
-
-
-    if (timermimmer > 100)
-    {
-
-    }
-
-    if (TimesSpin > 20)
-    {
-        spin = false;
-    }
-
-
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ZERO))
-    {
-        // tärning.värde
-    }
-
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_W) && spins == 0)
-    {
-        rullning = true;
-        spins = 1;
-        nummer = 20;
-    }
-
-    // if (rullning == true)
-    // {
-
-    //     timermimmer++;
-    //     if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && !spin && spins > -1)
-    //     {
-    //         spins = -1;
-    //         spin = true;
-    //         TimesSpin = 0;
-    //     }
-    //     if (spin)
-    //     {
-    //         if (timermimmer > 100)
-    //         {
-    //             nummer = tärning.Next(1, 7);
-    //             TimesSpin++;
-    //             timermimmer = 0;
-    //         }
-    //     }
-
-    //     if (TimesSpin > 20)
-    //     {
-    //         spin = false;
-    //     }
-
-    //     if (spins == -1)
-    //     {
-    //         if (Raylib.IsKeyPressed(KeyboardKey.KEY_F))
-    //         {
-    //             rullning = false;
-    //             spins = 0;
-    //         }
-    //     }
-
-
-
-
-    // }
-
-
-
-
-    int föf1 = Raylib.MeasureText(tärningar[0].värde.ToString(), stor);
-
-
-    //    PRUTCHANS
-
-
-
-
-
-
-
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_Q))
-    {
-        test = true;
-    }
-
     int yatzy = Raylib.MeasureText("YATZY!!", 300);
-
-
-
-
-
-
-
-
 
     //------------------------------------------------------------------------------------------------
     // visiols
@@ -207,59 +82,46 @@ while (!Raylib.WindowShouldClose())
 
     Raylib.BeginDrawing();
 
-
-
     Raylib.ClearBackground(Color.BROWN);
 
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     //1920/3
-    //     Raylib.DrawRectangle(i * width / 6 + width / 6, height / 2, 20, 20, Color.BLACK);
-    //     Raylib.DrawText(nummer.ToString(), i * width / 6 + width / 6 - föf / 2, height / 2 - stor / 2, stor, Color.BLACK);
+    // --------------------------------------rectanglar-bakom-sifror---------------------------------
+    if (!dice[0].Lock) Raylib.DrawRectangle(Width / 6 - 75, Height / 2 - Size / 2, 150, 175, Color.WHITE);
+    else Raylib.DrawRectangle(Width / 6 - 75, Height / 2 - Size / 2, 150, 175, Color.GRAY);
 
-    // }
+    if (!dice[1].Lock) Raylib.DrawRectangle(Width / 6 * 2 - 75, Height / 2 - Size / 2, 150, 175, Color.WHITE);
+    else Raylib.DrawRectangle(Width / 6 * 2 - 75, Height / 2 - Size / 2, 150, 175, Color.GRAY);
 
-    if (!tärningar[0].Låsande) Raylib.DrawRectangle(width / 6 - 75, height / 2 - stor / 2, 150, 175, Color.WHITE);
-    else Raylib.DrawRectangle(width / 6 - 75, height / 2 - stor / 2, 150, 175, Color.GRAY);
+    if (!dice[2].Lock) Raylib.DrawRectangle(Width / 6 * 3 - 75, Height / 2 - Size / 2, 150, 175, Color.WHITE);
+    else Raylib.DrawRectangle(Width / 6 * 3 - 75, Height / 2 - Size / 2, 150, 175, Color.GRAY);
 
-    if (!tärningar[1].Låsande) Raylib.DrawRectangle(width / 6 * 2 - 75, height / 2 - stor / 2, 150, 175, Color.WHITE);
-    else Raylib.DrawRectangle(width / 6 * 2 - 75, height / 2 - stor / 2, 150, 175, Color.GRAY);
+    if (!dice[3].Lock) Raylib.DrawRectangle(Width / 6 * 4 - 75, Height / 2 - Size / 2, 150, 175, Color.WHITE);
+    else Raylib.DrawRectangle(Width / 6 * 4 - 75, Height / 2 - Size / 2, 150, 175, Color.GRAY);
 
-    if (!tärningar[2].Låsande) Raylib.DrawRectangle(width / 6 * 3 - 75, height / 2 - stor / 2, 150, 175, Color.WHITE);
-    else Raylib.DrawRectangle(width / 6 * 3 - 75, height / 2 - stor / 2, 150, 175, Color.GRAY);
-
-    if (!tärningar[3].Låsande) Raylib.DrawRectangle(width / 6 * 4 - 75, height / 2 - stor / 2, 150, 175, Color.WHITE);
-    else Raylib.DrawRectangle(width / 6 * 4 - 75, height / 2 - stor / 2, 150, 175, Color.GRAY);
-
-    if (!tärningar[4].Låsande) Raylib.DrawRectangle(width / 6 * 5 - 75, height / 2 - stor / 2, 150, 175, Color.WHITE);
-    else Raylib.DrawRectangle(width / 6 * 5 - 75, height / 2 - stor / 2, 150, 175, Color.GRAY);
+    if (!dice[4].Lock) Raylib.DrawRectangle(Width / 6 * 5 - 75, Height / 2 - Size / 2, 150, 175, Color.WHITE);
+    else Raylib.DrawRectangle(Width / 6 * 5 - 75, Height / 2 - Size / 2, 150, 175, Color.GRAY);
+    // --------------------------------------------------------------------------------------------------
 
 
 
-
-
-    // if (tärning1 == tärning2 && tärning2 == tärning3 && tärning3 == tärning4 && tärning4 == tärning5 && tärning1 > 0)
-    // {
-    //     Raylib.DrawText("YATZY!!", width / 2 - yatzy / 2, 700, 300, Color.BLACK);
-    // }
-
-
-
-
-    for (int j = 0; j < tärningar.Count; j++)
+    // ------------------------------------------sifror--------------------------------------------------
+    for (int j = 0; j < dice.Count; j++)
     {
-        tärning tärn = tärningar[j];
+        int diceSize = Raylib.MeasureText(dice[j].Count.ToString(), Size);
+        tärning tärn = dice[j];
         int b = 1 + j;
-        Raylib.DrawText(tärn.värde.ToString(), width / 6 * b - föf1 / 2, height / 2 - stor / 2, stor, Color.BLACK);
+        Raylib.DrawText(tärn.Count.ToString(), Width / 6 * b - diceSize / 2, Height / 2 - Size / 2, Size, Color.BLACK);
     }
+    // --------------------------------------------------------------------------------------------------
+
+
 
 
 
     if (Raylib.IsKeyPressed(KeyboardKey.KEY_TAB))
     {
-        skriv *= -1;
+        writing *= -1;
     }
-    if (skriv == -1)
+    if (writing == -1)
     {
 
         for (int q = 0; q < 4; q++)
@@ -267,7 +129,7 @@ while (!Raylib.WindowShouldClose())
             for (int p = 0; p < 16; p++)
             {
 
-                textBox = new Rectangle(q * 150 + width / 3, p * 50 + 75, 150, 50);
+                textBox = new Rectangle(q * 150 + Width / 3, p * 50 + 75, 150, 50);
                 if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), textBox)) mouseOnText = true;
                 else mouseOnText = false;
 
@@ -288,7 +150,7 @@ while (!Raylib.WindowShouldClose())
                         // NOTE: Only allow keys in range [32..125]
                         if ((key >= 32) && (key <= 125) && (letterCount < MAX_INPUT_CHARS))
                         {
-                            name[letterCount] = (char)key;
+                            Name[letterCount] = (char)key;
                             // name[letterCount+1] = '\0'; // Add null terminator at the end of the string.
                             letterCount++;
                         }
@@ -301,60 +163,51 @@ while (!Raylib.WindowShouldClose())
                 if (mouseOnText) Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, (int)textBox.Width, (int)textBox.Height, Color.RED);
                 else Raylib.DrawRectangleLines((int)textBox.X, (int)textBox.Y, (int)textBox.Width, (int)textBox.Height, Color.DARKGRAY);
 
-                Raylib.DrawText(new String(name), (int)textBox.X + 5, (int)textBox.Y + 8, 40, Color.MAROON);
-
+                Raylib.DrawText(new String(Name), (int)textBox.X + 5, (int)textBox.Y + 8, 40, Color.MAROON);
             }
         }
     }
+
+
 
     Raylib.EndDrawing();
 }
 
 
-
-
-
 public class tärning
 {
-    Random random = new Random();
-    public int värde = 0;
+    Random Random = new Random();
 
-    public bool Låsande = false;
+    public int Count = 0;
 
-    public int slag = 3;
+    public bool Lock = false;
 
-    public int ändring = 0;
-    public float timmer = 0f;
+    public int Toses = 3;
+
+    public int ChangeCount = 0;
 
     public void Roll()
     {
-
-        timmer--;
-        
-        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && ChangeCount <= 0 && Toses > 0)
         {
-            ändring = 20;
-            if (timmer == 0&&ändring>0)
+            if (!Lock)
             {
-                ändring--;
-
-                if (!Låsande && slag > 0)
-                {
-                    värde = random.Next(1, 7);
-                }
-                slag--;
-                timmer=100f;
+                ChangeCount = 20;
             }
+            Toses--;
         }
+
+        if (ChangeCount > 0)
+        {
+            Count = Random.Next(1, 7);
+            ChangeCount--;
+        }
+
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_ZERO))
         {
-            slag = 3;
-            värde = 0;
-            Låsande = false;
+            Toses = 3;
+            Count = 0;
+            Lock = false;
         }
     }
 }
-
-
-
-
