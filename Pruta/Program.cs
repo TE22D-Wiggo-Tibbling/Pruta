@@ -27,6 +27,14 @@ foreach (tärning turn in dice)
 
 
 //------------------------------------------------------------------------------------------------
+// papper
+//------------------------------------------------------------------------------------------------
+
+
+string[] paper = {"Ettor","Tvåor","Treor","Fyror","Femmor","Sexor","1Par","2Par","Tretal","Fyrtal","Liten Straight","Stor Straight","Kåk","Chans","YATZY"};
+
+
+//------------------------------------------------------------------------------------------------
 //Variablar
 //------------------------------------------------------------------------------------------------
 
@@ -53,19 +61,19 @@ Raylib.SetTargetFPS(30);
 while (!Raylib.WindowShouldClose())
 {
     // -------------------------------------låsa--------------------------------------------------
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && !dice[0].Lock && dice[0].Count > 0) { dice[0].Lock = true; }
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && !dice[0].Lock && dice[0].number > 0) { dice[0].Lock = true; }
     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_ONE) && dice[0].Lock) { dice[0].Lock = false; }
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && !dice[1].Lock && dice[1].Count > 0) dice[1].Lock = true;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && !dice[1].Lock && dice[1].number > 0) dice[1].Lock = true;
     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_TWO) && dice[1].Lock) dice[1].Lock = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && !dice[2].Lock && dice[2].Count > 0) dice[2].Lock = true;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && !dice[2].Lock && dice[2].number > 0) dice[2].Lock = true;
     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_THREE) && dice[2].Lock) dice[2].Lock = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && !dice[3].Lock && dice[3].Count > 0) dice[3].Lock = true;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && !dice[3].Lock && dice[3].number > 0) dice[3].Lock = true;
     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FOUR) && dice[3].Lock) dice[3].Lock = false;
 
-    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && !dice[4].Lock && dice[4].Count > 0) dice[4].Lock = true;
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && !dice[4].Lock && dice[4].number > 0) dice[4].Lock = true;
     else if (Raylib.IsKeyPressed(KeyboardKey.KEY_FIVE) && dice[4].Lock) dice[4].Lock = false;
     // ------------------------------------------------------------------------------------------
 
@@ -106,10 +114,13 @@ while (!Raylib.WindowShouldClose())
     // ------------------------------------------sifror--------------------------------------------------
     for (int j = 0; j < dice.Count; j++)
     {
-        int diceSize = Raylib.MeasureText(dice[j].Count.ToString(), Size);
+        int diceSize = Raylib.MeasureText(dice[j].number.ToString(), Size);
         tärning tärn = dice[j];
         int b = 1 + j;
-        Raylib.DrawText(tärn.Count.ToString(), Width / 6 * b - diceSize / 2, Height / 2 - Size / 2, Size, Color.BLACK);
+        Raylib.DrawText(tärn.number.ToString(), Width / 6 * b - diceSize / 2, Height / 2 - Size / 2, Size, Color.BLACK);
+    }
+    for (int i = 0; i < dice.Count; i++)
+    {
     }
     // --------------------------------------------------------------------------------------------------
 
@@ -123,11 +134,15 @@ while (!Raylib.WindowShouldClose())
     }
     if (writing == -1)
     {
-
+        Raylib.DrawRectangle(Width/3-Raylib.MeasureText(paper[10],50)-20,70,1000,760,Color.WHITE);
         for (int q = 0; q < 4; q++)
         {
-            for (int p = 0; p < 16; p++)
+            for (int p = 0; p < 15; p++)
             {
+        int paaperPosition = Raylib.MeasureText(paper[p], 50);
+        
+        int b = 1 + p;
+        Raylib.DrawText(paper[p],Width / 3-paaperPosition-20, p * 50 + 75, 50, Color.BLACK);
 
                 textBox = new Rectangle(q * 150 + Width / 3, p * 50 + 75, 150, 50);
                 if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), textBox)) mouseOnText = true;
@@ -178,7 +193,7 @@ public class tärning
 {
     Random Random = new Random();
 
-    public int Count = 0;
+    public int number = 0;
 
     public bool Lock = false;
 
@@ -199,14 +214,14 @@ public class tärning
 
         if (ChangeCount > 0)
         {
-            Count = Random.Next(1, 7);
+            number = Random.Next(1, 7);
             ChangeCount--;
         }
 
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_ZERO))
         {
             Toses = 3;
-            Count = 0;
+            number = 0;
             Lock = false;
         }
     }
