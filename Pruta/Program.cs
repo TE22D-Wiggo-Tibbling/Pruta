@@ -37,28 +37,28 @@ string[] paper = { "Ettor", "Tvåor", "Treor", "Fyror", "Femmor", "Sexor", "1Par
 int Size = 200;
 
 
-int Width = 1920;
-int Height = 1080;
+int width = 1920;
+int height = 1080;
 
-Raylib.InitWindow(Width, Height, "wassa");
+Raylib.InitWindow(width, height, "wassa");
 
 // ---------------------------------------------------------------------------------------------
 
-Rectangle textBox = new Rectangle(Width / 3 - 100, 180, 150, 50);
+Rectangle textBox = new Rectangle(width / 3 - 100, 180, 150, 50);
 bool mouseOnText = false;
 
 // char[] Name = new char[MAX_INPUT_CHARS];
 
 // List<char> Text = new List<char>();
 
-List<int>[,] points = new List<int>[4, 15];
+List<char>[,] points = new List<char>[4, 15];
 
-points[0, 0] = new List<int>();
+points[0, 0] = new List<char>();
 for (int y = 0; y < points.GetLength(1); y++)
 {
     for (int x = 0; x < points.GetLength(0); x++)
     {
-        points[x, y] = new List<int>();
+        points[x, y] = new List<char>();
     }
 }
 // List<char>[,] points = new List<char>[4, 15];
@@ -109,17 +109,17 @@ while (!Raylib.WindowShouldClose())
 
     for (int i = 0; i < dice.Count; i++)
     {
-        if (Raylib.IsKeyPressed(keyboardKeys[i]) && !dice[i].Lock && dice[i].number > 0) { dice[i].Lock = true; }
-        else if (Raylib.IsKeyPressed(keyboardKeys[i]) && dice[i].Lock) { dice[i].Lock = false; }
+        if (Raylib.IsKeyPressed(keyboardKeys[i]) && !dice[i].@lock && dice[i].number > 0) { dice[i].@lock = true; }
+        else if (Raylib.IsKeyPressed(keyboardKeys[i]) && dice[i].@lock) { dice[i].@lock = false; }
 
         int b = i + 1;
-        if (!dice[i].Lock) Raylib.DrawRectangle(Width * b / 6 - 75, Height / 2 - Size / 2, 150, 175, Color.WHITE);
-        else Raylib.DrawRectangle(Width * b / 6 - 75, Height / 2 - Size / 2, 150, 175, Color.GRAY);
+        if (!dice[i].@lock) Raylib.DrawRectangle(width * b / 6 - 75, height / 2 - Size / 2, 150, 175, Color.WHITE);
+        else Raylib.DrawRectangle(width * b / 6 - 75, height / 2 - Size / 2, 150, 175, Color.GRAY);
 
         int diceSize = Raylib.MeasureText(dice[i].number.ToString(), Size);
         tärning tärn = dice[i];
 
-        Raylib.DrawText(tärn.number.ToString(), Width / 6 * b - diceSize / 2, Height / 2 - Size / 2, Size, Color.BLACK);
+        Raylib.DrawText(tärn.number.ToString(), width / 6 * b - diceSize / 2, height / 2 - Size / 2, Size, Color.BLACK);
     }
 
     // --------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ while (!Raylib.WindowShouldClose())
             key = Raylib.GetCharPressed();  // Check next character in the queue
         }
         Raylib.SetMouseCursor(MouseCursor.MOUSE_CURSOR_ARROW);
-        Raylib.DrawRectangle(Width / 3 - Raylib.MeasureText(paper[10], 50) - 20, 70, 1000, 760, Color.WHITE);
+        Raylib.DrawRectangle(width / 3 - Raylib.MeasureText(paper[10], 50) - 20, 70, 1000, 760, Color.WHITE);
         for (int x = 0; x < 4; x++)
         {
             for (int y = 0; y < 15; y++)
@@ -163,8 +163,8 @@ while (!Raylib.WindowShouldClose())
 
 
                 // Raylib.DrawText(paper[y], Width / 3 - paaperPosition - 20, y * 50 + 75, 50, Color.BLACK);
-                Raylib.DrawText(paper[y], Width / 3 - paaperPosition - 20, y * 50 + 75, 50, Color.BLACK);
-                textBox = new Rectangle(x * 150 + Width / 3, y * 50 + 75, 150, 50);
+                Raylib.DrawText(paper[y], width / 3 - paaperPosition - 20, y * 50 + 75, 50, Color.BLACK);
+                textBox = new Rectangle(x * 150 + width / 3, y * 50 + 75, 150, 50);
                 if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), textBox)) mouseOnText = true;
                 else mouseOnText = false;
 
@@ -189,7 +189,7 @@ while (!Raylib.WindowShouldClose())
                     // Check if more characters have been pressed on the same frame
                     for (int i = 0; i < dice.Count; i++)
                     {
-                        if (dice[i].Lock == true)
+                        if (dice[i].@lock == true)
                         {
                             combined = combined + dice[i].number;
                         }
@@ -204,7 +204,7 @@ while (!Raylib.WindowShouldClose())
             }
         }
     }
-    Raylib.DrawText(combined.ToString(), (int)textBox.X + 5, (int)textBox.Y + 8, 40, Color.MAROON);
+    // Raylib.DrawText(combined.ToString(), (int)textBox.X + 5, (int)textBox.Y + 8, 40, Color.MAROON);
 
 
 
@@ -214,38 +214,38 @@ while (!Raylib.WindowShouldClose())
 
 public class tärning
 {
-    Random Random = new Random();
+    Random random = new Random();
 
     public int number = 0;
 
-    public bool Lock = false;
+    public bool @lock = false;
 
-    public int Toses = 3;
+    public int toses = 3;
 
-    public int ChangeCount = 0;
+    public int changeCount = 0;
 
     public void Roll()
     {
-        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && ChangeCount <= 0 && Toses > 0)
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && changeCount <= 0 && toses > 0)
         {
-            if (!Lock)
+            if (!@lock)
             {
-                ChangeCount = 20;
+                changeCount = 20;
             }
-            Toses--;
+            toses--;
         }
 
-        if (ChangeCount > 0)
+        if (changeCount > 0)
         {
-            number = Random.Next(1, 7);
-            ChangeCount--;
+            number = random.Next(1, 7);
+            changeCount--;
         }
 
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_ZERO))
         {
-            Toses = 3;
+            toses = 3;
             number = 0;
-            Lock = false;
+            @lock = false;
         }
     }
 }
